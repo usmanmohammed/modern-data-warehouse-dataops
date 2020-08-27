@@ -46,6 +46,10 @@
 		"P_Ingest_MelbParkingData_properties_4_typeProperties_0_egg": {
 			"type": "string",
 			"defaultValue": "dbfs:/mnt/datalake/sys/databricks/libs/ddo_transform-localdev-py2.py3-none-any.whl"
+		},
+		"T_Sched_properties_P_Ingest_MelbParkingData_parameters_temporary": {
+			"type": "string",
+			"defaultValue": "DEV"
 		}
 	},
 	"variables": {
@@ -486,6 +490,12 @@
 						}
 					}
 				],
+				"parameters": {
+					"temporary": {
+						"type": "string",
+						"defaultValue": "TEMP"
+					}
+				},
 				"variables": {
 					"infilefolder": {
 						"type": "String",
@@ -515,7 +525,9 @@
 							"referenceName": "P_Ingest_MelbParkingData",
 							"type": "PipelineReference"
 						},
-						"parameters": {}
+						"parameters": {
+							"temporary": "[parameters('T_Sched_properties_P_Ingest_MelbParkingData_parameters_temporary')]"
+						}
 					}
 				],
 				"type": "ScheduleTrigger",
