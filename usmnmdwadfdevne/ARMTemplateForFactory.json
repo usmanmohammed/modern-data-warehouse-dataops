@@ -46,10 +46,6 @@
 		"Ls_Rest_MelParkSensors_01_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://data.melbourne.vic.gov.au/resource/"
-		},
-		"T_Sched_properties_P_Ingest_MelbParkingData_parameters_temporary": {
-			"type": "string",
-			"defaultValue": "DEV"
 		}
 	},
 	"variables": {
@@ -316,24 +312,35 @@
 							"referenceName": "Ls_AzureSQLDW_01",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Set variable1",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "tempVar",
+							"value": {
+								"value": "@pipeline().globalParameters.temp",
+								"type": "Expression"
+							}
+						}
 					}
 				],
-				"parameters": {
-					"temporary": {
-						"type": "string",
-						"defaultValue": "TEMP"
-					}
-				},
 				"variables": {
 					"infilefolder": {
 						"type": "String",
 						"defaultValue": "lnd"
+					},
+					"tempVar": {
+						"type": "String"
 					}
 				},
 				"annotations": [],
 				"lastPublishTime": "2020-08-24T21:29:00Z"
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/Ls_AzureDatabricks_01')]",
 				"[concat(variables('factoryId'), '/datasets/Ds_REST_MelbParkingData')]",
 				"[concat(variables('factoryId'), '/datasets/Ds_AdlsGen2_MelbParkingData')]",
@@ -379,6 +386,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/Ls_AdlsGen2_01')]"
 			]
 		},
@@ -407,6 +415,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/Ls_Rest_MelParkSensors_01')]"
 			]
 		},
@@ -430,6 +439,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/Ls_KeyVault_01')]"
 			]
 		},
@@ -459,6 +469,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/Ls_KeyVault_01')]"
 			]
 		},
@@ -481,6 +492,7 @@
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/linkedServices/Ls_KeyVault_01')]"
 			]
 		},
@@ -495,7 +507,9 @@
 					"baseUrl": "[parameters('Ls_KeyVault_01_properties_typeProperties_baseUrl')]"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Ls_Rest_MelParkSensors_01')]",
@@ -510,7 +524,9 @@
 					"authenticationType": "Anonymous"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[variables('factoryId')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/T_Sched')]",
@@ -525,9 +541,7 @@
 							"referenceName": "P_Ingest_MelbParkingData",
 							"type": "PipelineReference"
 						},
-						"parameters": {
-							"temporary": "[parameters('T_Sched_properties_P_Ingest_MelbParkingData_parameters_temporary')]"
-						}
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -535,14 +549,30 @@
 					"recurrence": {
 						"frequency": "Hour",
 						"interval": 1,
-						"startTime": "2019-02-01T05:28:00Z",
+						"startTime": "2019-02-01T05:28:00.000Z",
 						"timeZone": "UTC"
 					}
 				}
 			},
 			"dependsOn": [
+				"[variables('factoryId')]",
 				"[concat(variables('factoryId'), '/pipelines/P_Ingest_MelbParkingData')]"
 			]
+		},
+		{
+			"name": "[parameters('factoryName')]",
+			"type": "Microsoft.DataFactory/factories",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"globalParameters": {
+					"temp": {
+						"type": "string",
+						"value": "Global Variable test"
+					}
+				}
+			},
+			"dependsOn": [],
+			"location": "northeurope"
 		}
 	]
 }

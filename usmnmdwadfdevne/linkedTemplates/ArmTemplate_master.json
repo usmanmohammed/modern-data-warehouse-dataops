@@ -47,10 +47,6 @@
 			"type": "string",
 			"defaultValue": "https://data.melbourne.vic.gov.au/resource/"
 		},
-		"T_Sched_properties_P_Ingest_MelbParkingData_parameters_temporary": {
-			"type": "string",
-			"defaultValue": "DEV"
-		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -107,9 +103,6 @@
 					},
 					"P_Ingest_MelbParkingData_properties_4_typeProperties_0_egg": {
 						"value": "[parameters('P_Ingest_MelbParkingData_properties_4_typeProperties_0_egg')]"
-					},
-					"T_Sched_properties_P_Ingest_MelbParkingData_parameters_temporary": {
-						"value": "[parameters('T_Sched_properties_P_Ingest_MelbParkingData_parameters_temporary')]"
 					}
 				}
 			},

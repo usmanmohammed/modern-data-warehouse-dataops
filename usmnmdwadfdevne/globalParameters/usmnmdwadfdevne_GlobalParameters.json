@@ -1,1 +1,6 @@
-{}
+{
+	"temp": {
+		"type": "string",
+		"value": "Global Variable test"
+	}
+}
