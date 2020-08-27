@@ -1,0 +1,12 @@
+{
+	"name": "usmnmdwadfdevne",
+	"properties": {
+		"globalParameters": {
+			"temp": {
+				"type": "string",
+				"value": "Global Variable test"
+			}
+		}
+	},
+	"location": "northeurope"
+}
