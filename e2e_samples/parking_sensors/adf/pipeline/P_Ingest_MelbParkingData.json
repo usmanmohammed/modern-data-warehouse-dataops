@@ -256,18 +256,28 @@
 					"referenceName": "Ls_AzureSQLDW_01",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "tempVar",
+					"value": {
+						"value": "@pipeline().globalParameters.temp",
+						"type": "Expression"
+					}
+				}
 			}
 		],
-		"parameters": {
-			"temporary": {
-				"type": "string",
-				"defaultValue": "TEMP"
-			}
-		},
 		"variables": {
 			"infilefolder": {
 				"type": "String",
 				"defaultValue": "lnd"
+			},
+			"tempVar": {
+				"type": "String"
 			}
 		},
 		"annotations": [],
