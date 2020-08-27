@@ -258,6 +258,12 @@
 				}
 			}
 		],
+		"parameters": {
+			"temporary": {
+				"type": "string",
+				"defaultValue": "TEMP"
+			}
+		},
 		"variables": {
 			"infilefolder": {
 				"type": "String",

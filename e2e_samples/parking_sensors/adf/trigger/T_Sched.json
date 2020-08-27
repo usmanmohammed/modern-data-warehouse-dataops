@@ -8,6 +8,9 @@
 				"pipelineReference": {
 					"referenceName": "P_Ingest_MelbParkingData",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"temporary": "DEV"
 				}
 			}
 		],
